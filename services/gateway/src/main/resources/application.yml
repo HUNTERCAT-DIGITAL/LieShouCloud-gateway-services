@@ -118,55 +118,55 @@ spring:
           predicates:
             - Path=/v3/api-docs/user,/v3/api-docs/user/**
           filters:
-            - RewritePath=/v3/api-docs/user(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/user(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-admin
           uri: lb://lieshoucloud-admin
           predicates:
             - Path=/v3/api-docs/admin,/v3/api-docs/admin/**
           filters:
-            - RewritePath=/v3/api-docs/admin(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/admin(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-crm
           uri: lb://lieshoucloud-crm
           predicates:
             - Path=/v3/api-docs/crm,/v3/api-docs/crm/**
           filters:
-            - RewritePath=/v3/api-docs/crm(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/crm(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-inventory
           uri: lb://lieshoucloud-inventory
           predicates:
             - Path=/v3/api-docs/inventory,/v3/api-docs/inventory/**
           filters:
-            - RewritePath=/v3/api-docs/inventory(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/inventory(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-finance
           uri: lb://lieshoucloud-finance
           predicates:
             - Path=/v3/api-docs/finance,/v3/api-docs/finance/**
           filters:
-            - RewritePath=/v3/api-docs/finance(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/finance(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-approval
           uri: lb://lieshoucloud-approval
           predicates:
             - Path=/v3/api-docs/approval,/v3/api-docs/approval/**
           filters:
-            - RewritePath=/v3/api-docs/approval(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/approval(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-file
           uri: lb://lieshoucloud-file
           predicates:
             - Path=/v3/api-docs/file,/v3/api-docs/file/**
           filters:
-            - RewritePath=/v3/api-docs/file(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/file(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-iot
           uri: lb://lieshoucloud-iot
           predicates:
             - Path=/v3/api-docs/iot,/v3/api-docs/iot/**
           filters:
-            - RewritePath=/v3/api-docs/iot(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/iot(?<segment>/.*)?,/v3/api-docs${segment}
         - id: openapi-device-gateway
           uri: lb://lieshoucloud-device-gateway
           predicates:
             - Path=/v3/api-docs/device-gateway,/v3/api-docs/device-gateway/**
           filters:
-            - RewritePath=/v3/api-docs/device-gateway(?<segment>/.*),/v3/api-docs${segment}
+            - RewritePath=/v3/api-docs/device-gateway(?<segment>/.*)?,/v3/api-docs${segment}
 
         # Swagger UI 转发（开发期好用；prod 由 nginx 反代更稳）
         - id: swagger-ui-user
