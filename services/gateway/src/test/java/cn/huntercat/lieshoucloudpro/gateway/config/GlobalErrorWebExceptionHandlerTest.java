@@ -3,6 +3,7 @@ package cn.huntercat.lieshoucloudpro.gateway.config;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
 import org.springframework.mock.web.server.MockServerWebExchange;
+import org.springframework.web.reactive.resource.NoResourceFoundException;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +37,22 @@ class GlobalErrorWebExceptionHandlerTest {
     String body = writeAndRead(new IllegalStateException("boom"));
     assertThat(body).contains("\"error\":\"INTERNAL_ERROR\"");
     assertThat(body).contains("网关内部错误");
+  }
+
+  @Test
+  void noResourceFound_mapsTo404NotFound() {
+    // 未注册路由（开源交付包关闭行业路由后）→ 404 契约体，而非 500
+    String body = writeAndRead(new NoResourceFoundException("api/customers"));
+    assertThat(body).contains("\"error\":\"NOT_FOUND\"");
+    assertThat(body).contains("请求的资源不存在");
+  }
+
+  @Test
+  void noResourceFound_statusIs404() {
+    MockServerWebExchange exchange =
+        MockServerWebExchange.from(MockServerHttpRequest.get("/api/customers"));
+    handler.handle(exchange, new NoResourceFoundException("api/customers")).block();
+    assertThat(exchange.getResponse().getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }
 
   @Test

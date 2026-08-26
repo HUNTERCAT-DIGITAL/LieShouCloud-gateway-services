@@ -4,6 +4,7 @@ import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.resource.NoResourceFoundException;
 import org.springframework.web.server.ServerWebExchange;
 
 import org.slf4j.Logger;
@@ -38,7 +39,12 @@ public class GlobalErrorWebExceptionHandler implements ErrorWebExceptionHandler 
     String message = "网关内部错误，请稍后重试";
 
     Throwable root = rootCause(ex);
-    if (root instanceof ConnectException
+    if (root instanceof NoResourceFoundException) {
+      // 未注册路由（开源交付包关闭行业路由后，/api/customers 等无匹配）→ 404 而非 500
+      status = HttpStatus.NOT_FOUND;
+      error = "NOT_FOUND";
+      message = "请求的资源不存在";
+    } else if (root instanceof ConnectException
         || root instanceof TimeoutException
         || ex instanceof org.springframework.cloud.gateway.support.ServiceUnavailableException) {
       status = HttpStatus.SERVICE_UNAVAILABLE;
