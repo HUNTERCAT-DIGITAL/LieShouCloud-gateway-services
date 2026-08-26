@@ -83,6 +83,11 @@ spring:
           uri: lb://lieshoucloud-approval
           predicates:
             - Path=/api/approvals/**
+        # 开源版消息通知（站内信 · user 服务内模块）
+        - id: notification-route
+          uri: lb://lieshoucloud-user
+          predicates:
+            - Path=/api/notifications/**
         # core.file 起行业/商业路由已迁移至 IndustryRoutesConfig（Java DSL）
 
         # ----- OpenAPI 文档转发 (Phase 5) -----
@@ -104,6 +109,12 @@ spring:
             - Path=/v3/api-docs/approval,/v3/api-docs/approval/**
           filters:
             - RewritePath=/v3/api-docs/approval(?<segment>/.*)?,/v3/api-docs${segment}
+        - id: openapi-notification
+          uri: lb://lieshoucloud-user
+          predicates:
+            - Path=/v3/api-docs/notification,/v3/api-docs/notification/**
+          filters:
+            - RewritePath=/v3/api-docs/notification(?<segment>/.*)?,/v3/api-docs${segment}
         - id: swagger-ui-user
           uri: lb://lieshoucloud-user
           predicates:
@@ -122,6 +133,12 @@ spring:
             - Path=/swagger-ui/approval,/swagger-ui/approval/**
           filters:
             - RewritePath=/swagger-ui/approval(?<segment>/.*),/swagger-ui${segment}
+        - id: swagger-ui-notification
+          uri: lb://lieshoucloud-user
+          predicates:
+            - Path=/swagger-ui/notification,/swagger-ui/notification/**
+          filters:
+            - RewritePath=/swagger-ui/notification(?<segment>/.*),/swagger-ui${segment}
 
 # ============================================================
 # 应用配置
