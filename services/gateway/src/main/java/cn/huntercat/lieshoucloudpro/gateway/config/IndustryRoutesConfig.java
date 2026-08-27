@@ -84,11 +84,14 @@ public class IndustryRoutesConfig {
     routes.route(
         id,
         r ->
-            r.path("/swagger-ui/" + svc, "/swagger-ui/" + svc + "/**")
+            r.path(
+                    "/swagger-ui/" + svc,
+                    "/swagger-ui/" + svc + "/**")
                 .filters(
                     f ->
                         f.rewritePath(
-                            "/swagger-ui/" + svc + "(?<segment>/.*)", "/swagger-ui${segment}"))
+                            "/swagger-ui/" + svc + "(?<segment>/.*)?",
+                            "/swagger-ui${segment}"))
                 .uri("lb://lieshoucloud-" + svc));
   }
 }
