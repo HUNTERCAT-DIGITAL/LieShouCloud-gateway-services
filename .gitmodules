@@ -1,6 +1,3 @@
-[submodule "services/common"]
-	path = services/common
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-common.git
-[submodule "services/jwt-support"]
-	path = services/jwt-support
-	url = git@github.com:HUNTERCAT-DIGITAL/LieShouCloud-jwt-support.git
+[submodule "framework"]
+	path = framework
+	url = https://github.com/HUNTERCAT-DIGITAL/LieShou-framework.git

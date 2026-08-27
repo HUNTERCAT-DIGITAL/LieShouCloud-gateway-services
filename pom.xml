@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+    auth-services 聚合构建（submodule 引用模式，同 LieShouBoot）：
+    framework（→ LieShou-framework submodule） + services（common/jwt-support/auth）
+    一次构建：mvn -f pom.xml package（reactor 内解析 framework-* 依赖，无需 install）
+  -->
+  <groupId>cn.huntercat</groupId>
+  <artifactId>lieshoucloud-gateway-services-aggregator</artifactId>
+  <version>0.1.0</version>
+  <packaging>pom</packaging>
+
+  <name>gateway-services</name>
+
+  <modules>
+    <module>framework</module>
+    <module>services</module>
+  </modules>
+</project>

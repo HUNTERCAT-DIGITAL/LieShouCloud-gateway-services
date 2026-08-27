@@ -13,8 +13,6 @@
     <description>LieShouCloud open-source core services parent</description>
 
     <modules>
-        <module>common/services</module>
-        <module>jwt-support/services</module>
         <module>gateway</module>
     </modules>
 
