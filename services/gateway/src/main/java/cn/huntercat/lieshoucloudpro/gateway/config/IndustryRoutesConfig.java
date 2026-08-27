@@ -42,6 +42,8 @@ public class IndustryRoutesConfig {
     routes.route(
         "device-http-route",
         r -> r.path("/api/devices/v1/**").uri("lb://lieshoucloud-device-gateway"));
+    // 法律行业能力域（ADR-0045 · 案件/计时/文书/阶段/记忆/AI/知识成长）
+    routes.route("legal-route", r -> r.path("/api/legal/**").uri("lb://lieshoucloud-legal"));
 
     // ----- OpenAPI 文档转发（/v3/api-docs/{service} → 对应服务） -----
     openapiRoute(routes, "crm", "openapi-crm");
@@ -50,6 +52,7 @@ public class IndustryRoutesConfig {
     openapiRoute(routes, "file", "openapi-file");
     openapiRoute(routes, "iot", "openapi-iot");
     openapiRoute(routes, "device-gateway", "openapi-device-gateway");
+    openapiRoute(routes, "legal", "openapi-legal");
 
     // ----- Swagger UI 转发 -----
     swaggerUiRoute(routes, "crm", "swagger-ui-crm");
@@ -58,6 +61,7 @@ public class IndustryRoutesConfig {
     swaggerUiRoute(routes, "file", "swagger-ui-file");
     swaggerUiRoute(routes, "iot", "swagger-ui-iot");
     swaggerUiRoute(routes, "device-gateway", "swagger-ui-device-gateway");
+    swaggerUiRoute(routes, "legal", "swagger-ui-legal");
 
     return routes.build();
   }
