@@ -23,5 +23,5 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Maven verify (spotless:check + tests + jacoco)
-        run: mvn -B -ntp -DskipITs -s services/.m2-settings.xml verify
+        run: mvn -B -ntp -DskipITs -s .m2-settings.xml verify
         working-directory: services
