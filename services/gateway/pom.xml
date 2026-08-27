@@ -55,7 +55,7 @@
         <!-- JWT 共享模块（HS256 单一事实源 · Bottom-Up）：替代本地 JwtService -->
         <dependency>
             <groupId>cn.huntercat</groupId>
-            <artifactId>lieshoucloud-jwt-support</artifactId>
+            <artifactId>framework-jwt</artifactId>
         </dependency>
 
         <!-- jjwt (Phase 5 JWT 闭环鉴权 - gateway 与 auth-service 共签) -->

@@ -160,6 +160,12 @@
                 <artifactId>lieshoucloud-jwt-support</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- LieShou-framework 业务核心（上游同源唯一） -->
+            <dependency>
+                <groupId>cn.huntercat</groupId>
+                <artifactId>framework-jwt</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import cn.huntercat.lieshoucloudpro.jwt.JwtSupport;
+import cn.huntercat.lieshou.framework.jwt.JwtSupport;
 
 /** JWT 共享能力 bean（HS256 · 单一事实源，自 jwt-support 模块；与 auth-service 同源 secret）. */
 @Configuration

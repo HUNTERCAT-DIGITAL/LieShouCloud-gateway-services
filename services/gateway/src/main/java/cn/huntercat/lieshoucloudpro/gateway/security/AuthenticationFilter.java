@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.huntercat.lieshoucloudpro.gateway.config.ApiErrorWriter;
-import cn.huntercat.lieshoucloudpro.jwt.JwtSupport;
+import cn.huntercat.lieshou.framework.jwt.JwtSupport;
 import io.jsonwebtoken.Claims;
 import java.util.List;
 import reactor.core.publisher.Mono;
