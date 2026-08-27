@@ -21,7 +21,7 @@ import reactor.core.publisher.Flux;
 
 /**
  * IndustryRoutesConfig 开关行为（纯单元测试，不加载 Spring 上下文）： - lsc.industry-routes-enabled=false（开源交付包）→
- * 行业/商业路由一个不注册； - true（缺省，商业/客户仓）→ 18 条行业路由全部注册。
+ * 行业/商业路由一个不注册； - true（缺省，商业/客户仓）→ 21 条行业路由全部注册。
  */
 class IndustryRoutesConfigTest {
 
@@ -45,7 +45,10 @@ class IndustryRoutesConfigTest {
           "swagger-ui-finance",
           "swagger-ui-file",
           "swagger-ui-iot",
-          "swagger-ui-device-gateway");
+          "swagger-ui-device-gateway",
+          "legal-route",
+          "openapi-legal",
+          "swagger-ui-legal");
 
   private RouteLocator build(boolean enabled) throws Exception {
     IndustryRoutesConfig config = new IndustryRoutesConfig();
