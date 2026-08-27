@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  LieShouCloudPro · 本地 / CI 通用 Maven 镜像配置
+  lieshou-cloud-pro · 本地 / CI 通用 Maven 镜像配置
   优先走阿里云镜像 (国内快), 兜底走 Maven Central
   4 个后端 Dockerfile 的 builder 阶段都会 COPY 此文件到 /root/.m2/settings.xml
 -->

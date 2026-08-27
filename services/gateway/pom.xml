@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>lieshoucloud-gateway</artifactId>
-    <name>LieShouCloud · Gateway</name>
+    <name>lieshou-cloud · Gateway</name>
     <description>Spring Cloud Gateway - 统一入口</description>
 
     <dependencies>

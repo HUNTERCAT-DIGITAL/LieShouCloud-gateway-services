@@ -1,7 +1,7 @@
-# LieShouCloud-gateway-services · 开源后端服务:gateway
+# lieshou-cloud-gateway-services · 开源后端服务:gateway
 
-> 自 LieShouCloud-core/services/gateway 拆分(2026-08 细粒度)。
-> 组合:services/common → LieShouCloud-common + services/jwt-support → LieShouCloud-jwt-support。
+> 自 lieshou-cloud-core/services/gateway 拆分(2026-08 细粒度)。
+> 组合:services/common → lieshou-cloud-common + services/jwt-support → lieshou-cloud-jwt-support。
 
 ```bash
 cd services

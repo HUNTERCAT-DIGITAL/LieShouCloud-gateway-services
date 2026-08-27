@@ -9,8 +9,8 @@
     <artifactId>lieshoucloud-services-open</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>LieShouCloud Open · Services Parent</name>
-    <description>LieShouCloud open-source core services parent</description>
+    <name>lieshou-cloud Open · Services Parent</name>
+    <description>lieshou-cloud open-source core services parent</description>
 
     <modules>
         <module>gateway</module>
@@ -158,7 +158,7 @@
                 <artifactId>lieshoucloud-jwt-support</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- LieShou-framework 业务核心（上游同源唯一） -->
+            <!-- lieshou-framework 业务核心（上游同源唯一） -->
             <dependency>
                 <groupId>cn.huntercat</groupId>
                 <artifactId>framework-jwt</artifactId>
