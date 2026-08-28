@@ -47,6 +47,8 @@ public class IndustryRoutesConfig {
     // 海赞总部 · 项目管控（组织/项目/里程碑/任务）→ project-service
     routes.route("project-route", r -> r.path("/api/projects/**").uri("lb://lieshoucloud-project"));
     routes.route("org-route", r -> r.path("/api/orgs/**").uri("lb://lieshoucloud-project"));
+    // 海赞总部 · 人事档案（R4.2 员工入转调离）→ project-service
+    routes.route("employee-route", r -> r.path("/api/employees/**").uri("lb://lieshoucloud-project"));
 
     // ----- OpenAPI 文档转发（/v3/api-docs/{service} → 对应服务） -----
     openapiRoute(routes, "crm", "openapi-crm");
