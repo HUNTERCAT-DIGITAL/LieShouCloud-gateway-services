@@ -83,6 +83,11 @@ spring:
           uri: lb://lieshoucloud-approval
           predicates:
             - Path=/api/approvals/**
+        # R5.2：审批流程类型配置 → approval-service
+        - id: approval-type-route
+          uri: lb://lieshoucloud-approval
+          predicates:
+            - Path=/api/approval-types/**
         # 开源版消息通知（站内信 · user 服务内模块）
         - id: notification-route
           uri: lb://lieshoucloud-user
