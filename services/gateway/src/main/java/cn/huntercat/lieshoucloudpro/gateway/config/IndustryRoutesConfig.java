@@ -44,6 +44,9 @@ public class IndustryRoutesConfig {
     routes.route(
         "device-http-route",
         r -> r.path("/api/devices/v1/**").uri("lb://lieshoucloud-device-gateway"));
+    // 海赞总部 · 项目管控（组织/项目/里程碑/任务）→ project-service
+    routes.route("project-route", r -> r.path("/api/projects/**").uri("lb://lieshoucloud-project"));
+    routes.route("org-route", r -> r.path("/api/orgs/**").uri("lb://lieshoucloud-project"));
 
     // ----- OpenAPI 文档转发（/v3/api-docs/{service} → 对应服务） -----
     openapiRoute(routes, "crm", "openapi-crm");
