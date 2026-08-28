@@ -36,7 +36,9 @@ public class IndustryRoutesConfig {
     routes.route("crm-route", r -> r.path("/api/customers/**").uri("lb://lieshoucloud-crm"));
     routes.route(
         "inventory-route", r -> r.path("/api/products/**").uri("lb://lieshoucloud-inventory"));
-    routes.route("finance-route", r -> r.path("/api/ledger/**", "/api/bank/**").uri("lb://lieshoucloud-finance"));
+    routes.route(
+        "finance-route",
+        r -> r.path("/api/ledger/**", "/api/bank/**").uri("lb://lieshoucloud-finance"));
     routes.route("file-route", r -> r.path("/api/files/**").uri("lb://lieshoucloud-file"));
     routes.route("iot-route", r -> r.path("/api/iot/**").uri("lb://lieshoucloud-iot"));
     routes.route(
