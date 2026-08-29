@@ -34,18 +34,26 @@ class IndustryRoutesConfigTest {
           "file-route",
           "iot-route",
           "device-http-route",
+          "legal-route",
           "openapi-crm",
           "openapi-inventory",
           "openapi-finance",
           "openapi-file",
           "openapi-iot",
           "openapi-device-gateway",
+          "openapi-legal",
           "swagger-ui-crm",
           "swagger-ui-inventory",
           "swagger-ui-finance",
           "swagger-ui-file",
           "swagger-ui-iot",
-          "swagger-ui-device-gateway");
+          "swagger-ui-device-gateway",
+          "swagger-ui-legal",
+          // 海赞总部 · 项目管控/人事档案（project-service）
+          "project-route",
+          "org-route",
+          "employee-route",
+          "metric-route");
 
   private RouteLocator build(boolean enabled) throws Exception {
     IndustryRoutesConfig config = new IndustryRoutesConfig();
@@ -87,7 +95,8 @@ class IndustryRoutesConfigTest {
             "lb://lieshoucloud-finance",
             "lb://lieshoucloud-file",
             "lb://lieshoucloud-iot",
-            "lb://lieshoucloud-device-gateway");
+            "lb://lieshoucloud-device-gateway",
+            "lb://lieshoucloud-legal");
     // 不含开源服务 URI（开源路由在 application.yml）
     assertThat(uris)
         .noneMatch(u -> u.contains("lieshoucloud-user") || u.contains("lieshoucloud-auth"));

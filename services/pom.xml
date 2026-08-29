@@ -185,6 +185,12 @@
                         <parameters>${maven.compiler.parameters}</parameters>
                     </configuration>
                 </plugin>
+                <!-- Surefire: JUnit 5 测试（Maven 3.8 默认 2.12.4 不识别 JUnit 5，显式锁 3.x） -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.2.5</version>
+                </plugin>
 
                 <!-- ============================================================
                      Spotless: Java 端代码格式化与导入顺序
