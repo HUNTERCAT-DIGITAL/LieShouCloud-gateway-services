@@ -127,6 +127,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         || path.startsWith("/api/devices/v1/")
         // 设备照片静态读取（ADR-0040 派生 · <img> 无法带 header，URL 为 UUID 不可枚举）
         || path.startsWith("/api/iot/photos/")
+        // 分享 token 免登录只读（H5 触达层 · POST /api/iot/share 生成仍需登录）
+        || path.startsWith("/api/iot/share-access/")
         // Nacos 注册回调 (Spring Cloud 心跳/注册)
         || path.startsWith("/nacos/");
   }
