@@ -57,14 +57,23 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     // 鉴权
     String auth = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-    if (auth == null || !auth.startsWith(BEARER_PREFIX)) {
+    String token = null;
+    if (auth != null && auth.startsWith(BEARER_PREFIX)) {
+      token = auth.substring(BEARER_PREFIX.length()).trim();
+    } else {
+      // SSE / EventSource 场景：无法携带 Authorization header，支持 query 参数 access_token（2026-08-30）
+      String qToken = exchange.getRequest().getQueryParams().getFirst("access_token");
+      if (qToken != null && !qToken.isBlank()) {
+        token = qToken.trim();
+      }
+    }
+    if (token == null) {
       return ApiErrorWriter.write(
           exchange.getResponse(),
           HttpStatus.UNAUTHORIZED,
           "MISSING_BEARER_TOKEN",
           "缺少 Bearer Token");
     }
-    String token = auth.substring(BEARER_PREFIX.length()).trim();
     if (!jwt.validate(token)) {
       return ApiErrorWriter.write(
           exchange.getResponse(),
