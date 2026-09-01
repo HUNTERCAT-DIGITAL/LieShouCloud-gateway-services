@@ -60,6 +60,9 @@ public class IndustryRoutesConfig {
     // 海赞总部 · 集团文档管理（C2 企业网盘）→ project-service
     routes.route(
         "document-route", r -> r.path("/api/documents/**").uri("lb://lieshoucloud-project"));
+    // 海赞总部 · 数据资产入表（C4）→ project-service
+    routes.route(
+        "data-asset-route", r -> r.path("/api/data-assets/**").uri("lb://lieshoucloud-project"));
 
     // ----- OpenAPI 文档转发（/v3/api-docs/{service} → 对应服务） -----
     openapiRoute(routes, "crm", "openapi-crm");
