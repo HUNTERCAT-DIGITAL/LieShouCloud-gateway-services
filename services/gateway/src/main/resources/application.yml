@@ -58,6 +58,11 @@ spring:
           uri: lb://lieshoucloud-user
           predicates:
             - Path=/api/tenants/**
+        # 2026-09 头像：用户头像静态文件读取 → user-service（公开 · UUID 不可枚举）
+        - id: user-files-route
+          uri: lb://lieshoucloud-user
+          predicates:
+            - Path=/api/user-files/**
         # Phase 8 RBAC：角色管理 → user-service
         - id: role-route
           uri: lb://lieshoucloud-user
