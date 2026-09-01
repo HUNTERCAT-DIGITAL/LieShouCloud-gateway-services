@@ -39,6 +39,12 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
   private static final String HDR_X_USER_ROLES = "X-User-Roles";
   private static final String HDR_X_TENANT_ID = "X-Tenant-Id";
   private static final String HDR_X_TENANT_CODE = "X-Tenant-Code";
+  private static final String HDR_X_CROSS_TENANT = "X-Cross-Tenant";
+
+  /** 跨租户只读：PLATFORM_ADMIN（集团超管）可携带 ?tenantId= 覆盖租户上下文（仅 GET） */
+  private static final String ROLE_PLATFORM_ADMIN = "PLATFORM_ADMIN";
+
+  private static final String QP_TENANT_ID = "tenantId";
 
   private final JwtSupport jwt;
 
@@ -98,6 +104,40 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     @SuppressWarnings("unchecked")
     List<String> roles = claims.get("roles", List.class);
 
+    // ===== 跨租户只读（B4 · 集团超管） =====
+    // PLATFORM_ADMIN + ?tenantId=NNN → 覆盖租户上下文（仅 GET 只读）；其他一律按 JWT tid 隔离。
+    String qTenantId = exchange.getRequest().getQueryParams().getFirst(QP_TENANT_ID);
+    boolean crossTenant =
+        qTenantId != null
+            && !qTenantId.isBlank()
+            && roles != null
+            && roles.contains(ROLE_PLATFORM_ADMIN);
+    if (crossTenant) {
+      String method = exchange.getRequest().getMethod().name();
+      if (!"GET".equalsIgnoreCase(method) && !"HEAD".equalsIgnoreCase(method)) {
+        return ApiErrorWriter.write(
+            exchange.getResponse(),
+            HttpStatus.FORBIDDEN,
+            "CROSS_TENANT_READ_ONLY",
+            "跨租户访问仅支持只读（GET），写操作请在目标租户内进行");
+      }
+      try {
+        Long target = Long.parseLong(qTenantId.trim());
+        if (target <= 0) throw new NumberFormatException();
+        tenantId = target;
+        tenantCode = null; // code 未知（需查库），仅覆盖 id；下游按 X-Tenant-Id 过滤
+        log.info(
+            "[cross-tenant] uid={} username={} → tenant={} path={} (PLATFORM_ADMIN 只读)",
+            uid,
+            username,
+            target,
+            path);
+      } catch (NumberFormatException e) {
+        return ApiErrorWriter.write(
+            exchange.getResponse(), HttpStatus.BAD_REQUEST, "INVALID_TENANT_ID", "tenantId 必须为正整数");
+      }
+    }
+
     // 注入用户信息到请求头（让下游服务可直接读；Phase 8 含租户维度 ADR-0022）
     ServerHttpRequest mutated =
         exchange
@@ -108,6 +148,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             .header(HDR_X_USER_ROLES, roles == null ? "" : String.join(",", roles))
             .header(HDR_X_TENANT_ID, tenantId == null ? "" : String.valueOf(tenantId))
             .header(HDR_X_TENANT_CODE, tenantCode == null ? "" : tenantCode)
+            .header(HDR_X_CROSS_TENANT, crossTenant ? "true" : "") // 供下游识别跨租户访问（审计/日志）
             .build();
     return chain.filter(exchange.mutate().request(mutated).build());
   }
