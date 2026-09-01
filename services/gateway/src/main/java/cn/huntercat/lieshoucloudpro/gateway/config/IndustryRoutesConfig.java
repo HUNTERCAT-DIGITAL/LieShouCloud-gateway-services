@@ -50,11 +50,16 @@ public class IndustryRoutesConfig {
     routes.route("project-route", r -> r.path("/api/projects/**").uri("lb://lieshoucloud-project"));
     routes.route("org-route", r -> r.path("/api/orgs/**").uri("lb://lieshoucloud-project"));
     // 投资组合（被投企业主数据 · 2026-08 信息架构深化）→ project-service
-    routes.route("portfolio-route", r -> r.path("/api/portfolio/**").uri("lb://lieshoucloud-project"));
+    routes.route(
+        "portfolio-route", r -> r.path("/api/portfolio/**").uri("lb://lieshoucloud-project"));
     // 海赞总部 · 人事档案（R4.2 员工入转调离）→ project-service
-    routes.route("employee-route", r -> r.path("/api/employees/**").uri("lb://lieshoucloud-project"));
+    routes.route(
+        "employee-route", r -> r.path("/api/employees/**").uri("lb://lieshoucloud-project"));
     // 海赞总部 · 经营指标回传（R6.1）→ project-service
     routes.route("metric-route", r -> r.path("/api/metrics/**").uri("lb://lieshoucloud-project"));
+    // 海赞总部 · 集团文档管理（C2 企业网盘）→ project-service
+    routes.route(
+        "document-route", r -> r.path("/api/documents/**").uri("lb://lieshoucloud-project"));
 
     // ----- OpenAPI 文档转发（/v3/api-docs/{service} → 对应服务） -----
     openapiRoute(routes, "crm", "openapi-crm");
