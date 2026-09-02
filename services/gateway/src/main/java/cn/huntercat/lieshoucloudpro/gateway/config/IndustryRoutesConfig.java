@@ -46,6 +46,8 @@ public class IndustryRoutesConfig {
         r -> r.path("/api/devices/v1/**").uri("lb://lieshoucloud-device-gateway"));
     // ADR-0045 · 律师办案（智法云枢:案件/阶段/计时/费用/文书/函件/评审/客户价值/知识/AI）
     routes.route("legal-route", r -> r.path("/api/legal/**").uri("lb://lieshoucloud-legal"));
+    // 协会运营系统（xiehui · 会员/会费/财务/预算/审批/活动/报名签到/资讯/邮件/汇报）→ xiehui-service
+    routes.route("xiehui-route", r -> r.path("/api/xiehui/**").uri("lb://lieshoucloud-xiehui"));
     // 海赞总部 · 项目管控（组织/项目/里程碑/任务）→ project-service
     routes.route("project-route", r -> r.path("/api/projects/**").uri("lb://lieshoucloud-project"));
     routes.route("org-route", r -> r.path("/api/orgs/**").uri("lb://lieshoucloud-project"));

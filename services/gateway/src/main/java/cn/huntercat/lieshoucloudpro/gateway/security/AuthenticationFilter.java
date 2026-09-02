@@ -181,6 +181,8 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         || path.startsWith("/api/user-files/avatars/")
         // 分享 token 免登录只读（H5 触达层 · POST /api/iot/share 生成仍需登录）
         || path.startsWith("/api/iot/share-access/")
+        // 协会运营系统 对外门户公开读（活动/资讯浏览 · 报名等写操作仍需登录）
+        || path.startsWith("/api/xiehui/public/")
         // Nacos 注册回调 (Spring Cloud 心跳/注册)
         || path.startsWith("/nacos/");
   }
